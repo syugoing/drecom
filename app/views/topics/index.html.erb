@@ -5,60 +5,63 @@
 
     <h2>今日の目標</h2>
     <% @topics.reverse.each do |topic| %>
-      <% if topic.created_at.strftime("%y/%m/%d") == Time.zone.now.strftime("%y/%m/%d") then%>
-        <% if topic.status == 1 then%>
-          <div class="row" style="background-color : #FFE4B5">
-          <%elsif topic.status == 2 then%>
-          <div class="row" style="background-color : #ADD8E6">
-          <%else%>
-          <div class="row">
-        <%end%>
-        <p><%= topic.content %></p>
-        <div style="display:inline-flex">
-        <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "PUT") do %>
-          <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
+        <%if topic.user_id == current_user.id then%>
+          <% if topic.created_at.strftime("%y/%m/%d") == Time.zone.now.strftime("%y/%m/%d") then%>
+            <% if topic.status == 1 then%>
+              <div class="row" style="background-color : #FFE4B5">
+              <%elsif topic.status == 2 then%>
+              <div class="row" style="background-color : #ADD8E6">
+              <%else%>
+              <div class="row">
+            <%end%>
+            <p><%= topic.content %></p>
+            <div style="display:inline-flex">
+            <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "PUT") do %>
+              <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
+            <% end %>
+            <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "DELETE") do %>
+              <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
+            <% end %>
+            </div>
+            <span class="edit_btn">
+              <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
+              <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+            </span>
+            </div>
+            <% @today = true%>
+          <%end%>
         <% end %>
-        <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "DELETE") do %>
-          <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
-        <% end %>
-        </div>
-        <span class="edit_btn">
-          <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
-          <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-        </span>
-        </div>
-        <% @today = true%>
-      <%end%>
     <% end %>
+
     <%if !(@today)  then%>
       <%= render 'form' %>
     <%end%>
 
     <% @missions.each do |mission| %>
-      <% if mission.status == 1 then%>
-        <div class="row" style="background-color : #FFE4B5">
-        <%elsif mission.status == 2 then%>
-        <div class="row" style="background-color : #ADD8E6">
-        <%else%>
-        <div class="row">
-      <%end%>
-      <h3><%= mission.title %></h3>
-      <p><%= mission.content %></p>
-
-      <div style="display:inline-flex">
-      <%= form_tag('/status/'+ mission.id.to_s , method: "PUT") do %>
-        <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
-      <% end %>
-      <%= form_tag('/status/'+ mission.id.to_s , method: "DELETE") do %>
-        <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
-      <% end %>
-      </div>
-
-      <span class="edit_btn">
-        <%= link_to "編集", edit_mission_path(mission.id), class: 'btn btn-default btn-sm btn-success' %>
-        <%= link_to "削除", mission_path(mission.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-      </span>
-      </div>
+      <% if mission.user_id == current_user.id then%>
+          <% if mission.status == 1 then%>
+            <div class="row" style="background-color : #FFE4B5">
+            <%elsif mission.status == 2 then%>
+            <div class="row" style="background-color : #ADD8E6">
+            <%else%>
+            <div class="row">
+          <%end%>
+          <h3><%= mission.title %></h3>
+          <p><%= mission.content %></p>
+          <div style="display:inline-flex">
+          <%= form_tag('/status/'+ mission.id.to_s , method: "PUT") do %>
+            <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
+          <% end %>
+          <%= form_tag('/status/'+ mission.id.to_s , method: "DELETE") do %>
+            <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
+          <% end %>
+          </div>
+          <span class="edit_btn">
+            <%= link_to "編集", edit_mission_path(mission.id), class: 'btn btn-default btn-sm btn-success' %>
+            <%= link_to "削除", mission_path(mission.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+          </span>
+          </div>
+       <% end %>
     <% end %>
 
     <br>

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable #, :confirmable
   mount_uploader :avatar, AvatarUploader
+  has_many :topics
+  has_many :missions
 
   def self.create_unique_string
      SecureRandom.uuid

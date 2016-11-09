@@ -6,6 +6,7 @@ class MissionsController < ApplicationController
 
   def create
     @mission = Mission.new(missions_params)
+    @mission.user_id = current_user.id
     if @mission.save
       redirect_to topics_path, notice: "作成しました。"
     else
