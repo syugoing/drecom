@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
          image_url:   auth.info.image,
          password: Devise.friendly_token[0, 20]
          )
-      user.skip_confirmation!
+      # user.skip_confirmation!
       user.save(validate: false)
      end
     user
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
          email:    auth.info.email ||= "#{auth.uid}-#{auth.provider}@example.com",
          password: Devise.friendly_token[0, 20],
          )
-       user.skip_confirmation!
+      #  user.skip_confirmation!
        user.save
      end
    user
