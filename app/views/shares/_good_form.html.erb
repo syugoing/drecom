@@ -1,0 +1,12 @@
+<div id="good_form_<%= topic.id %>">
+  <% unless current_user.gooding?(topic) %>
+    <%= form_for(current_user.goods.build(gooded_id: topic.id), remote: true) do |f| %>
+      <%= f.hidden_field :gooded_id %>
+      <%= f.submit "いいね！", class: "btn btn-large btn-primary" %>
+    <% end %>
+    <% else %>
+    <%= form_for(current_user.goods.find_by(gooded_id: topic.id), html: { method: :delete }, remote: true) do |f| %>
+      <%= f.submit "取り消し", class: "btn btn-large" %>
+    <% end %>
+  <% end %>
+</div>

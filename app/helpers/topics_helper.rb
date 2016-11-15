@@ -6,4 +6,15 @@ module TopicsHelper
       mission_path
     end
   end
+
+  def shared_range(topic)
+    if topic.share == 0
+      return "公開"
+    elsif topic.share == 1
+      return "友達のみ"
+    elsif topic.share == 2
+      return "非公開"
+    end
+  end
+  
 end

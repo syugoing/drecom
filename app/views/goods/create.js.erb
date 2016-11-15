@@ -1,0 +1,1 @@
+$("#good_form_"+"<%= @topic.id %>").html("<%= escape_javascript(render partial: 'shares/good_form', locals: { topic: @topic } ) %>")

@@ -27,6 +27,7 @@
               <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
               <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
             </span>
+            <span class="share_range">公開範囲：<%= shared_range(topic) %></span>
             </div>
             <% @today = true%>
           <%end%>
@@ -60,6 +61,7 @@
             <%= link_to "編集", edit_mission_path(mission.id), class: 'btn btn-default btn-sm btn-success' %>
             <%= link_to "削除", mission_path(mission.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
           </span>
+          <span class="share_range">公開範囲：<%= shared_range(mission) %></span>
           </div>
        <% end %>
     <% end %>
@@ -67,7 +69,4 @@
     <br>
     <%= link_to "新しい目標を作成する", new_mission_path, class: 'btn btn-default' %>
   </div>
-</div>
-<div id="page-top-btn-blog" class="page-top-btn">
-    <p><a class="move-page-top" id="move-page-top">▲</a></p>
 </div>

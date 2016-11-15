@@ -11,26 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109053751) do
+ActiveRecord::Schema.define(version: 20161115013001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "goods", force: :cascade do |t|
+    t.integer  "gooder_id"
+    t.integer  "gooded_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "goods", ["gooded_id"], name: "index_goods_on_gooded_id", using: :btree
+  add_index "goods", ["gooder_id", "gooded_id"], name: "index_goods_on_gooder_id_and_gooded_id", unique: true, using: :btree
+  add_index "goods", ["gooder_id"], name: "index_goods_on_gooder_id", using: :btree
 
   create_table "missions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
+    t.integer  "share",      default: 0, null: false
   end
 
   create_table "topics", force: :cascade do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "status"
+    t.integer  "share",      default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|

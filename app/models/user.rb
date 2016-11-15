@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   has_many :topics
   has_many :missions
+  has_many :goods, foreign_key: "gooder_id", dependent: :destroy
+  has_many :gooded_topics, through: :goods, source: :gooded
 
   def self.create_unique_string
      SecureRandom.uuid
@@ -53,4 +55,17 @@ class User < ActiveRecord::Base
        update_without_password(params, *options)
      end
   end
+
+  def good!(topic)
+    goods.create!(gooded_id: topic.id)
+  end
+
+  def gooding?(topic)
+    goods.find_by(gooded_id: topic.id)
+  end
+
+  def ungood!(topic)
+    goods.find_by(gooded_id: topic.id).destroy
+  end
+
 end
