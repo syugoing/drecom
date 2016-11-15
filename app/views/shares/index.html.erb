@@ -4,6 +4,7 @@
     <%= Time.zone.now.strftime("%Y年%m月%d日") %>
 
     <% @topics.reverse.each do |topic| %>
+      <% if topic.share == 0 then%>
             <% if topic.status == 1 then%>
               <div class="row" style="background-color : #FFE4B5">
               <%elsif topic.status == 2 then%>
@@ -22,9 +23,11 @@
             </inline>
             <inline class="goodcount">いいね<%= topic.gooders.count %>件</inline>
           </div>
+      <% end %>
     <% end %>
 
     <% @missions.each do |mission| %>
+      <%if mission.share == 0 then%>
           <% if mission.status == 1 then%>
             <div class="row" style="background-color : #FFE4B5">
             <%elsif mission.status == 2 then%>
@@ -51,6 +54,7 @@
               </span>
             <% end %>
           </div>
-       <% end %>
+      <%end%>
+    <% end %>
   </div>
 </div>
