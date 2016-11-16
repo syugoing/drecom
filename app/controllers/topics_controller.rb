@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
     @topic = Topic.new
     @today = false
     @missions = Mission.all
+    @comment = @topic.comments.build
+    @comments = Comment.all
   end
 
 

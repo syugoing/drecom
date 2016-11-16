@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable #, :confirmable
   mount_uploader :avatar, AvatarUploader
-  has_many :topics
+  has_many :topics, dependent: :destroy
   has_many :missions
   has_many :goods, foreign_key: "gooder_id", dependent: :destroy
   has_many :gooded_topics, through: :goods, source: :gooded
+  has_many :comments, dependent: :destroy
 
   def self.create_unique_string
      SecureRandom.uuid
