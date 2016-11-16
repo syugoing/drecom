@@ -22,6 +22,7 @@ header {
   }
   .navbar-nav > li > a {
     color: #808080;
+    position: relative;
     z-index: 3;
     background-color: rgba(44,62,80,0.3);
     &:hover, &:focus {
@@ -132,6 +133,7 @@ padding-top: 10px;
 .wrapper {
   margin: 0px auto 74px;
   padding: 20px 20px 20px 35px;
+  position: relative;
   z-index: 2;
   .row {
     border-bottom: 1px solid #ccc;
@@ -146,6 +148,7 @@ input[type="submit"].btn-block{
 
 .container{
   padding-bottom: 85px;
+  position: relative;
   z-index: 1;
 }
 
