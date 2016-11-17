@@ -63,9 +63,10 @@
   </body>
 
   <footer>
+    <% if user_signed_in? %>
     <div class="footer_my col-xs-6"><%= link_to 'my目標', topics_path	 %></div>
     <div class="footer_share col-xs-6"><%= link_to '掲示板', shares_path %></div>
-
+    <% end %>
   </footer>
  </div>
 </html>
