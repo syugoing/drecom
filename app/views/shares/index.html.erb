@@ -6,11 +6,11 @@
     <% @topics.reverse.each do |topic| %>
       <% if topic.share == 0 then%>
             <% if topic.status == 1 then%>
-              <div class="row" style="background-color : #FFE4B5">
+              <div class="row topic_area" style="background-color : #FFE4B5">
               <%elsif topic.status == 2 then%>
-              <div class="row" style="background-color : #ADD8E6">
+              <div class="row topic_area" style="background-color : #ADD8E6">
               <%else%>
-              <div class="row">
+              <div class="row topic_area">
             <%end%>
 
             <div class="row">
@@ -55,7 +55,7 @@
               <%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
             </div>
 
-          </div>
+          </div><br>
 
       <% end %>
     <% end %>
@@ -63,11 +63,11 @@
     <% @missions.each do |mission| %>
       <%if mission.share == 0 then%>
           <% if mission.status == 1 then%>
-            <div class="row" style="background-color : #FFE4B5">
+            <div class="row topic_area" style="background-color : #FFE4B5">
             <%elsif mission.status == 2 then%>
-            <div class="row" style="background-color : #ADD8E6">
+            <div class="row topic_area" style="background-color : #ADD8E6">
             <%else%>
-            <div class="row">
+            <div class="row topic_area">
           <%end%>
           <div class="row">
             <div class="col-xs-4">
@@ -95,7 +95,7 @@
             <% end %>
 
 
-          </div>
+          </div><br>
       <%end%>
     <% end %>
   </div>
