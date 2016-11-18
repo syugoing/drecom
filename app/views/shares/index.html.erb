@@ -14,15 +14,42 @@
             <%end%>
             <inline class="icon"><%= profile_img(topic.user) if profile_img(topic.user) %></inline>
             <inline>&nbsp;&nbsp;&nbsp;<%= topic.user.name %>さんが <%=topic.updated_at.strftime("%Y年%m月%d日 %H:%M")%> に投稿しました。</inline>
-            <h4><b><%= topic.created_at.strftime("%m月%d日") %>の目標</b></h4>
-            <p><%= topic.content %></p>
+            <div class="title"><%= topic.created_at.strftime("%m月%d日") %>の目標</div>
+            <p class="content"><%= topic.content %></p>
+
+            <% if topic.user_id == current_user.id then%>
+              <div style="display:inline-flex">
+              <%= form_tag('/status/'+ topic.id.to_s , method: "PUT") do %>
+                <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
+              <% end %>
+              <%= form_tag('/status/'+ topic.id.to_s , method: "DELETE") do %>
+                <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
+              <% end %>
+              </div>
+              <span class="edit_btn">
+                <%= link_to "編集", edit_mission_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
+                <%= link_to "削除", mission_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+              </span>
+            <% end %>
+
+
+
              <inline class="goodbutton">
                <% if topic.user_id != current_user.id then%>
                  <%= render 'good_form', topic: topic %>
                <%end%>
             </inline>
             <inline class="goodcount">いいね<%= topic.gooders.count %>件</inline>
+
+            <div class="comment-area-col col-xs-12">
+              <div id="comments_area_<%= topic.id %>">
+                <%= render partial: 'comments/index', locals: { comments: @comments, topic: topic, id: @topic_id } %>
+              </div>
+              <%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
+            </div>
+
           </div>
+
       <% end %>
     <% end %>
 
@@ -37,8 +64,8 @@
           <%end%>
           <inline class="icon"><%= profile_img(mission.user) if profile_img(mission.user) %></inline>
             <inline>&nbsp;&nbsp;&nbsp;<%= mission.user.name %>さんが <%=mission.updated_at.strftime("%Y年%m月%d日 %H:%M")%> に投稿しました。</inline>
-          <h4><b><%= mission.title %></b></h4>
-          <p><%= mission.content %></p>
+          <div class="title"><%= mission.title %></div>
+          <p class="content"><%= mission.content %></p>
             <% if mission.user_id == current_user.id then%>
               <div style="display:inline-flex">
               <%= form_tag('/status/'+ mission.id.to_s , method: "PUT") do %>
@@ -53,6 +80,8 @@
                 <%= link_to "削除", mission_path(mission.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
               </span>
             <% end %>
+
+
           </div>
       <%end%>
     <% end %>

@@ -6,7 +6,7 @@
     <% end %>
     <% else %>
     <%= form_for(current_user.goods.find_by(gooded_id: topic.id), html: { method: :delete }, remote: true) do |f| %>
-      <%= f.submit "取り消し", class: "btn btn-large" %>
+      <%= f.submit "取り消し", class: "btn btn-large torikesi" %>
     <% end %>
   <% end %>
 </div>
