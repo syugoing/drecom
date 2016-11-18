@@ -14,11 +14,11 @@
             <%end%>
 
             <div class="row">
-              <div class="col-xs-3">
+              <div class="col-xs-4">
                 <inline class="icon"><%= profile_img(topic.user) if profile_img(topic.user) %></inline>
               </div>
-              <div class="col-xs-9">
-                <div class="name_time"><%= topic.user.name %>さん <%=topic.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
+              <div class="col-xs-8">
+                <div class="name_time"><%= topic.user.name %>さん<br><%=topic.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
               </div>
             </div>
 
@@ -71,11 +71,11 @@
             <div class="row">
           <%end%>
           <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-4">
               <inline class="icon"><%= profile_img(mission.user) if profile_img(mission.user) %></inline>
             </div>
-            <div class="col-xs-9">
-              <div class="name_time"><%= mission.user.name %>さん <%=mission.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
+            <div class="col-xs-8">
+              <div class="name_time"><%= mission.user.name %>さん<br><%=mission.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
             </div>
           </div>
           <div class="title"><%= mission.title %></div>
