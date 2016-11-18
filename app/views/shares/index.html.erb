@@ -13,7 +13,7 @@
               <div class="row">
             <%end%>
             <inline class="icon"><%= profile_img(topic.user) if profile_img(topic.user) %></inline>
-            <inline>&nbsp;&nbsp;&nbsp;<%= topic.user.name %>さんが <%=topic.updated_at.strftime("%Y年%m月%d日 %H:%M")%> に投稿しました。</inline>
+            <div class="name_time">&nbsp;&nbsp;<%= topic.user.name %>さん <%=topic.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
             <div class="title"><%= topic.created_at.strftime("%m月%d日") %>の目標</div>
             <p class="content"><%= topic.content %></p>
 
@@ -63,7 +63,7 @@
             <div class="row">
           <%end%>
           <inline class="icon"><%= profile_img(mission.user) if profile_img(mission.user) %></inline>
-            <inline>&nbsp;&nbsp;&nbsp;<%= mission.user.name %>さんが <%=mission.updated_at.strftime("%Y年%m月%d日 %H:%M")%> に投稿しました。</inline>
+            <div class="name_time">&nbsp;&nbsp;&nbsp;<%= mission.user.name %>さん <%=mission.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
           <div class="title"><%= mission.title %></div>
           <p class="content"><%= mission.content %></p>
             <% if mission.user_id == current_user.id then%>
