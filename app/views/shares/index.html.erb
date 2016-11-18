@@ -40,8 +40,6 @@
               </span>
             <% end %>
 
-
-
              <inline class="goodbutton">
                <% if topic.user_id != current_user.id then%>
                  <%= render 'good_form', topic: topic %>
@@ -49,6 +47,7 @@
             </inline>
             <inline class="goodcount">いいね<%= topic.gooders.count %>件</inline>
 
+            <br><br>
             <div class="comment-area-col col-xs-12">
               <div id="comments_area_<%= topic.id %>">
                 <%= render partial: 'comments/index', locals: { comments: @comments, topic: topic, id: @topic_id } %>
