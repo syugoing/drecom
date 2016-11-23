@@ -1,6 +1,6 @@
 <div class="container">
   <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
-    <h2>編集する</h2>
+    <h2>新しい目標を作成する</h2>
 
     <%= form_for(@topic) do |f| %>
       <%= f.error_messages! %>
@@ -15,5 +15,6 @@
       </div>
       <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
     <% end %>
+
   </div>
 </div>

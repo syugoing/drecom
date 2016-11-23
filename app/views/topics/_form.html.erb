@@ -1,6 +1,10 @@
 <%= form_for(@topic) do |f| %>
   <%= f.error_messages! %>
 
+  <% @topic.title = "今日の目標" %>
+  <%= f.hidden_field :title , value: @topic.title%>
+  <% @topic.today = true %>
+  <%= f.hidden_field :today , value: @topic.today%>
   <%= f.text_area :content, class: 'form-control' %>
   <br>
   <div class="radio_button">

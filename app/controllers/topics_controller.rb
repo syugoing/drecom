@@ -48,9 +48,13 @@ class TopicsController < ApplicationController
     end
   end
 
+  def new
+    @topic = Topic.new
+  end
+
 private
   def topics_params
-    params.require(:topic).permit(:content, :status, :share)
+    params.require(:topic).permit(:content, :status, :share, :title, :today)
   end
 
 end

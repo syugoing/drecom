@@ -1,4 +1,6 @@
 class SharesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @topics = Topic.all
     @topic = Topic.new

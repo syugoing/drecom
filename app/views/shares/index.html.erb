@@ -22,7 +22,12 @@
               </div>
             </div>
 
+            <%if topic.title == "今日の目標" then%>
             <div class="title"><%= topic.created_at.strftime("%m月%d日") %>の目標</div>
+            <%else%>
+            <div class="title"><%= topic.title%></div>
+            <%end%>
+            
             <p class="content"><%= topic.content %></p>
 
             <% if topic.user_id == current_user.id then%>
@@ -35,8 +40,8 @@
               <% end %>
               </div>
               <span class="edit_btn">
-                <%= link_to "編集", edit_mission_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
-                <%= link_to "削除", mission_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+                <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
+                <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
               </span>
             <% end %>
 
@@ -58,45 +63,6 @@
           </div><br>
 
       <% end %>
-    <% end %>
-
-    <% @missions.each do |mission| %>
-      <%if mission.share == 0 then%>
-          <% if mission.status == 1 then%>
-            <div class="row topic_area" style="background-color : #FFE4B5">
-            <%elsif mission.status == 2 then%>
-            <div class="row topic_area" style="background-color : #ADD8E6">
-            <%else%>
-            <div class="row topic_area">
-          <%end%>
-          <div class="row">
-            <div class="col-xs-4">
-              <inline class="icon"><%= profile_img(mission.user) if profile_img(mission.user) %></inline>
-            </div>
-            <div class="col-xs-8">
-              <div class="name_time"><%= mission.user.name %>さん<br><%=mission.updated_at.strftime("%Y年%m月%d日 %H:%M")%></div>
-            </div>
-          </div>
-          <div class="title"><%= mission.title %></div>
-          <p class="content"><%= mission.content %></p>
-            <% if mission.user_id == current_user.id then%>
-              <div style="display:inline-flex">
-              <%= form_tag('/status/'+ mission.id.to_s , method: "PUT") do %>
-                <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
-              <% end %>
-              <%= form_tag('/status/'+ mission.id.to_s , method: "DELETE") do %>
-                <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
-              <% end %>
-              </div>
-              <span class="edit_btn">
-                <%= link_to "編集", edit_mission_path(mission.id), class: 'btn btn-default btn-sm btn-success' %>
-                <%= link_to "削除", mission_path(mission.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
-              </span>
-            <% end %>
-
-
-          </div><br>
-      <%end%>
     <% end %>
   </div>
 </div>

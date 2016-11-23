@@ -1,0 +1,33 @@
+<%if topic.title == "今日の目標" then%>
+<h2><%= topic.created_at.strftime("%m月%d日") %>の目標</h2>
+<%else%>
+<h2><%= topic.title%></h2>
+<%end%>
+
+<% if topic.status == 1 then%>
+  <div class="row" style="background-color : #FFE4B5">
+  <%elsif topic.status == 2 then%>
+  <div class="row" style="background-color : #ADD8E6">
+  <%else%>
+  <div class="row">
+<%end%>
+<p><%= topic.content %></p>
+<div style="display:inline-flex">
+    <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "PUT") do %>
+      <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
+    <% end %>
+    <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "DELETE") do %>
+      <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
+    <% end %>
+</div>
+<span class="edit_btn">
+    <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
+    <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+</span>
+<span class="share_range">公開範囲：<%= shared_range(topic) %></span>
+
+<div id="comments_area">
+  <%= render partial: 'comments/index', locals: { comments: @comments, topic: topic } %>
+</div>
+<%= render partial: 'comments/form', locals: { comment: @comment, topic: topic } %>
+</div>

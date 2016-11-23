@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   resources :topics do
     resources :comments
   end
-  resources :missions
-  resources :shares
+  resources :shares, only: [:index]
   resources :status, only: [:update, :destroy]
   resources :todaystatus, only: [:update, :destroy]
   resources :goods, only: [:create, :destroy]
