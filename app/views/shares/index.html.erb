@@ -3,6 +3,7 @@
     <p class="tuuti"><%= notice %></p>
     <%= Time.zone.now.strftime("%Y年%m月%d日") %>
 
+
     <% @topics.reverse.each do |topic| %>
       <% if topic.share == 0 then%>
             <% if topic.status == 1 then%>
@@ -27,17 +28,17 @@
             <%else%>
             <div class="title"><%= topic.title%></div>
             <%end%>
-            
+
             <p class="content"><%= topic.content %></p>
 
             <% if topic.user_id == current_user.id then%>
               <div style="display:inline-flex">
-              <%= form_tag('/status/'+ topic.id.to_s , method: "PUT") do %>
-                <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
-              <% end %>
-              <%= form_tag('/status/'+ topic.id.to_s , method: "DELETE") do %>
-                <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
-              <% end %>
+                <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "PUT") do %>
+                  <%= submit_tag  '達成！', class: 'btn btn-default btn-sm btn-warning' %>
+                <% end %>
+                <%= form_tag('/todaystatus/'+ topic.id.to_s , method: "DELETE") do %>
+                  <%= submit_tag  '＿|￣|○', class: 'btn btn-default btn-sm btn-primary' %>
+                <% end %>
               </div>
               <span class="edit_btn">
                 <%= link_to "編集", edit_topic_path(topic.id), class: 'btn btn-default btn-sm btn-success' %>
@@ -51,6 +52,8 @@
                <%end%>
             </inline>
             <inline class="goodcount">いいね<%= topic.gooders.count %>件</inline>
+            <span class="genre_area">ジャンル：<%= genre(topic.genre) %></span>
+
 
             <br><br>
             <div class="comment-area-col col-xs-12">

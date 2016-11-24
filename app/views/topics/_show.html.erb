@@ -25,6 +25,7 @@
     <%= link_to "削除", topic_path(topic.id), method: :delete, data: { confirm: '本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
 </span>
 <span class="share_range">公開範囲：<%= shared_range(topic) %></span>
+<span class="genre_area">ジャンル：<%= genre(topic.genre) %></span>
 
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, topic: topic } %>

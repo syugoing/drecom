@@ -54,7 +54,7 @@ class TopicsController < ApplicationController
 
 private
   def topics_params
-    params.require(:topic).permit(:content, :status, :share, :title, :today)
+    params.require(:topic).permit(:content, :status, :share, :title, :today, :genre)
   end
 
 end
